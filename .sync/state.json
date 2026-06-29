@@ -1,6 +1,27 @@
 {
-  "$comment": "Baseline: 'what's already in sync'. lastSyncedGitSha is the functional detection anchor (git diff <it>..HEAD); lastSyncedAt is audit-only. 'docs' holds per-file {noteId, repoHash, sliteHash}. SEED this after the bootstrap (set lastSyncedGitSha to the working-branch HEAD and fill repoHash/sliteHash per doc via `sync-detect.sh hash`). Start empty.",
-  "lastSyncedGitSha": "<seed commit sha — set to working-branch HEAD after bootstrap>",
-  "lastSyncedAt": "<ISO-8601 UTC>",
-  "docs": {}
+  "$comment": "Baseline: 'what's already in sync'. lastSyncedGitSha is the functional detection anchor (git diff <it>..HEAD); lastSyncedAt is audit-only. 'docs' holds per-file {noteId, repoHash, sliteHash}. Seeded at bootstrap: lastSyncedGitSha = working-branch HEAD; repoHash via `sync-detect.sh hash <repo file>`; sliteHash via get-note (md) -> temp file -> `sync-detect.sh hash`.",
+  "lastSyncedGitSha": "0cd1fdbc498c65b8bdee82499e7d9d4276ae0d74",
+  "lastSyncedAt": "2026-06-29T22:51:23Z",
+  "docs": {
+    "source1.md": {
+      "noteId": "gMGdP_bx8xd28J",
+      "repoHash": "9d62853de9666e161dd9078f6baeaa73dcb6c2beb2eb7706cca4e5ec6d6083be",
+      "sliteHash": "f6842cbd0c9c207ea47cc08edc839b597d07984f2b3df5f84abea6093adc60cb"
+    },
+    "source2.md": {
+      "noteId": "W9yod54659Vt20",
+      "repoHash": "a3b004321868af7c9adc2a94299d30403b2ff7e3f3511951dd7dc5b1993fa913",
+      "sliteHash": "ea0ac674bbef30d04c0cdc3444aefe3add11c19189b854db727e3625c49de00a"
+    },
+    "docs/note1": {
+      "noteId": "8sAg3oIl31HTNP",
+      "repoHash": "09c6c4b6e164a072e0b0a4caa22330d51ad7877ac27fce51ce6300b73d772890",
+      "sliteHash": "9a3ba7aa6b16c6f4ef97eaad06c9597092174b6d726720e3b380150ad3507b7e"
+    },
+    "docs/note2": {
+      "noteId": "IE_t5F25QSCyes",
+      "repoHash": "2d8c2f6d978ca21712b5f6de36c9d31fa8e96a4fa5d8ff8b0188dfb9e7c171bb",
+      "sliteHash": "cd86c7adb9dae0d93cd182670247b49e7757fe0ff9a9f7bb7a18e786982e6743"
+    }
+  }
 }

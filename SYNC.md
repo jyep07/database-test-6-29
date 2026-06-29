@@ -1,19 +1,19 @@
 # GitHub ↔ Slite sync (comment-driven) — design + runbook
 
 Single source of truth for the two-way sync between this repo's markdown and the
-Slite `<root title>` folder. This is the only doc you need: design, the
+Slite `slite-database-test` folder. This is the only doc you need: design, the
 `state.json` baseline model, the change rules, the Routine A/B prompts you paste
 into the routine form, cost, and how to test. The repo travels between Claude
 sessions; conversation memory does not — so everything needed is here.
 
-_Last updated: 2026-06-29. Branch: `<working-branch>` (off `main`)._
+_Last updated: 2026-06-29. Branch: `claude/github-slite-sync-setup-jnwie0` (off `main`)._
 
-> **Start here in a fresh session:** check out `<working-branch>`, read
+> **Start here in a fresh session:** check out `claude/github-slite-sync-setup-jnwie0`, read
 > this file, confirm the Slite connector is attached, and do **all** work on this
 > branch — never touch `main`.
 
-> **Template placeholders:** values in `<angle brackets>` — `<owner>/<repo>`,
-> `<working-branch>`, `<root-note-id>`, `<root title>` — are placeholders. Fill them in
+> **Template placeholders:** values in `<angle brackets>` — `jyep07/database-test-6-29`,
+> `claude/github-slite-sync-setup-jnwie0`, `xujLY3F2jUDLuA`, `slite-database-test` — are placeholders. Fill them in
 > here (and the placeholders in `.sync/slite-map.json` / `.sync/state.json`) before the
 > first run. See the README's "Fill in the placeholders before going live".
 
@@ -276,20 +276,20 @@ are truly contradictory and no defensible merge exists.
 ## Routine A — `sync-plan`
 
 **Trigger (tester):** manual **Run now** (add a daily schedule once proven).
-**Repository:** `<owner>/<repo>`  **Connectors:** Slite only  **Branch pushes:** `claude/` prefix is fine.
+**Repository:** `jyep07/database-test-6-29`  **Connectors:** Slite only  **Branch pushes:** `claude/` prefix is fine.
 **Model:** Sonnet 4.6 recommended (see Cost & model selection).
 
 **Prompt:**
 
-> You are doing a two-way sync between this repo's docs and the Slite `<root title>`
-> folder (root note id `<root-note-id>`). This run is **read-only on Slite**: a
+> You are doing a two-way sync between this repo's docs and the Slite `slite-database-test`
+> folder (root note id `xujLY3F2jUDLuA`). This run is **read-only on Slite**: a
 > PreToolUse hook blocks every Slite write tool (including comment resolves), so
 > propose changes only — never apply them to Slite.
 >
 > **0. Check out the working branch first.** Routines clone `main`, but the sync
 > tooling and state (`.sync/`, the working copy of `SYNC.md`) live on
-> `<working-branch>` — `main` carries only the read-only guard. Before doing anything
-> else, run `git fetch origin <working-branch> && git checkout <working-branch>`.
+> `claude/github-slite-sync-setup-jnwie0` — `main` carries only the read-only guard. Before doing anything
+> else, run `git fetch origin claude/github-slite-sync-setup-jnwie0 && git checkout claude/github-slite-sync-setup-jnwie0`.
 > Do all work on this branch and never commit to `main`. (The read-only guard in
 > `.claude/settings.json` is identical on `main`, so it is already active at session
 > start — the checkout just swaps in the sync tooling and state.)
@@ -355,7 +355,7 @@ are truly contradictory and no defensible merge exists.
 > no conflicts, STOP: do not create a branch, commit, or open a PR. End the run.
 >
 > **5. Supersede an open sync PR, or guard.** List open PRs whose base is
-> `<working-branch>`. Because `state.json` only advances after a merge, this
+> `claude/github-slite-sync-setup-jnwie0`. Because `state.json` only advances after a merge, this
 > run has already re-detected the **full cumulative** change-set (every still-unresolved
 > comment + every repo change since `lastSyncedGitSha`) — so a fresh PR from this run is
 > a complete replacement for any un-merged one, not a delta. Decide per open PR:
@@ -376,12 +376,12 @@ are truly contradictory and no defensible merge exists.
 > guard above exists either way.)
 >
 > **6. Open the PR.** Create branch `claude/sync-<YYYY-MM-DD>` **off
-> `<working-branch>`** (if you superseded a same-day branch in step 5, delete
+> `claude/github-slite-sync-setup-jnwie0`** (if you superseded a same-day branch in step 5, delete
 > it first so the name is free, or append `-HHMM`), commit the repo-side edits
 > (comment-driven file edits,
 > **conflict-reconciliation file edits**, new/deleted files) plus the updated
 > `.sync/pending-slite-changes.json` (`scanGitSha` = step 1's `headSha`), and open a PR
-> **with base branch `<working-branch>` (NOT `main`)**. The PR body must list,
+> **with base branch `claude/github-slite-sync-setup-jnwie0` (NOT `main`)**. The PR body must list,
 > per doc, the direction (git→Slite, comment→both, or conflict). For each comment-driven
 > item quote the comment + author + threadId. For each **conflict**, add a clearly-headed
 > **"⚠ Proposed conflict resolution — review carefully"** block showing: the `repoDiff`
@@ -397,7 +397,7 @@ are truly contradictory and no defensible merge exists.
 
 **Trigger:** GitHub event → `pull_request.closed`, filters: **is merged = true**,
 **head branch contains `sync`**.
-**Repository:** `<owner>/<repo>`  **Connectors:** Slite only
+**Repository:** `jyep07/database-test-6-29`  **Connectors:** Slite only
 **Environment:** set **`SYNC_ALLOW_WRITES=1`** so the read-only guard permits Slite
 writes (body + comment resolves) for this routine. Use a dedicated environment; do
 not add this var to Routine A's.
@@ -409,9 +409,9 @@ not add this var to Routine A's.
 > A sync PR was just merged.
 >
 > **0. Check out the working branch first.** Routines clone `main`, but the merged
-> sync content and the sync tooling live on `<working-branch>`
+> sync content and the sync tooling live on `claude/github-slite-sync-setup-jnwie0`
 > (the sync PR merged *into* that branch, not `main`). Run
-> `git fetch origin <working-branch> && git checkout <working-branch>`
+> `git fetch origin claude/github-slite-sync-setup-jnwie0 && git checkout claude/github-slite-sync-setup-jnwie0`
 > before anything else, and do all work there — never commit to `main`.
 >
 > Then read `.sync/pending-slite-changes.json` — it has `scanGitSha`, `to_slite`
@@ -468,8 +468,8 @@ not add this var to Routine A's.
 >    `{ "scanGitSha": "", "to_slite": [], "from_comments": [] }`.
 > 5. **Commit** the updated `state.json`, `slite-map.json`, and reset change-set to a
 >    **new branch `claude/baseline-<YYYY-MM-DD-HHMM>`** (must NOT contain "sync") cut
->    **off `<working-branch>`**, open a PR "Baseline update for <date>"
->    **with base branch `<working-branch>` (NOT `main`)**, then **merge it
+>    **off `claude/github-slite-sync-setup-jnwie0`**, open a PR "Baseline update for <date>"
+>    **with base branch `claude/github-slite-sync-setup-jnwie0` (NOT `main`)**, then **merge it
 >    yourself via the GitHub API** (`merge_pull_request`). Never commit to or target
 >    `main`.
 >
@@ -485,20 +485,20 @@ not add this var to Routine A's.
 **Prerequisites**
 1. **Add Slite as a claude.ai connector** at claude.ai/customize/connectors — a
    routine can't use a CLI-only MCP server.
-2. **Install the Claude GitHub App** on `<owner>/<repo>` — required for Routine B's
+2. **Install the Claude GitHub App** on `jyep07/database-test-6-29` — required for Routine B's
    PR-merge trigger and its API self-merge.
 3. Default "Trusted" network access is sufficient; Slite traffic routes through Anthropic.
 
 **No branch picker — select the branch in the prompt.** The routine form has no
 branch field; routines always clone the repo's **default branch (`main`)** and Claude
 makes `claude/`-prefixed branches. That's why both prompts above start with **step 0**:
-`git fetch origin <working-branch> && git checkout <working-branch>`.
+`git fetch origin claude/github-slite-sync-setup-jnwie0 && git checkout claude/github-slite-sync-setup-jnwie0`.
 The read-only guard is identical on `main`, so it's active from the first tool call;
 the checkout just swaps in the correct comment-driven tooling and state. Every branch
-in play (`<working-branch>`, `claude/sync-*`, `claude/baseline-*`) is
+in play (`claude/github-slite-sync-setup-jnwie0`, `claude/sync-*`, `claude/baseline-*`) is
 `claude/`-prefixed, so the default "claude/ only" push restriction is sufficient — you
 do **not** need "Allow unrestricted branch pushes." Keep the sync PR base and baseline
-PR base at `<working-branch>` so nothing ever targets `main`.
+PR base at `claude/github-slite-sync-setup-jnwie0` so nothing ever targets `main`.
 
 ## Cost & model selection
 
