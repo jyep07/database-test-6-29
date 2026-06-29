@@ -1,0 +1,11 @@
+{
+  "$comment": "Maps repo doc paths to Slite note IDs for the GitHub <-> Slite sync. Replace every <placeholder>. 'channel' = the Slite channel the tree lives in; 'root' = the space/folder the tree hangs under; 'folders' = section name -> Slite folder-note id (targets for newly-created docs); 'docs' = repo file path -> Slite note id. The one-time bootstrap can GENERATE this for you (see SYNC.md / the bootstrap runbook).",
+  "channel": "<slite channel id>",
+  "root": { "title": "<space / root title>", "noteId": "<root note id>" },
+  "folders": {
+    "<section-folder-name>": "<slite folder note id>"
+  },
+  "docs": {
+    "<docs/path/to/file.md>": "<slite note id>"
+  }
+}

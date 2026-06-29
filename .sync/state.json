@@ -1,0 +1,6 @@
+{
+  "$comment": "Baseline: 'what's already in sync'. lastSyncedGitSha is the functional detection anchor (git diff <it>..HEAD); lastSyncedAt is audit-only. 'docs' holds per-file {noteId, repoHash, sliteHash}. SEED this after the bootstrap (set lastSyncedGitSha to the working-branch HEAD and fill repoHash/sliteHash per doc via `sync-detect.sh hash`). Start empty.",
+  "lastSyncedGitSha": "<seed commit sha — set to working-branch HEAD after bootstrap>",
+  "lastSyncedAt": "<ISO-8601 UTC>",
+  "docs": {}
+}
