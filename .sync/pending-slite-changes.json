@@ -1,15 +1,1 @@
-{
-  "scanGitSha": "106f8cf105c9e10f1c14455dfd2f273e591eab4b",
-  "to_slite": [],
-  "from_comments": [
-    {
-      "noteId": "8sAg3oIl31HTNP",
-      "threadId": "fAl37XC9IYQy-s",
-      "path": "docs/note1",
-      "author": "Jessica Yep",
-      "comment": "add \"and there.\".",
-      "anchoredText": "here",
-      "summary": "Inserted \" and there\" into sentence: \"some words can go here.\" → \"some words can go here and there.\""
-    }
-  ]
-}
+{ "scanGitSha": "", "to_slite": [], "from_comments": [] }

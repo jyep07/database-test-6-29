@@ -1,7 +1,7 @@
 {
   "$comment": "Baseline: 'what's already in sync'. lastSyncedGitSha is the functional detection anchor (git diff <it>..HEAD); lastSyncedAt is audit-only. 'docs' holds per-file {noteId, repoHash, sliteHash}. Seeded at bootstrap: lastSyncedGitSha = working-branch HEAD; repoHash via `sync-detect.sh hash <repo file>`; sliteHash via get-note (md) -> temp file -> `sync-detect.sh hash`.",
-  "lastSyncedGitSha": "0cd1fdbc498c65b8bdee82499e7d9d4276ae0d74",
-  "lastSyncedAt": "2026-06-29T22:51:23Z",
+  "lastSyncedGitSha": "106f8cf105c9e10f1c14455dfd2f273e591eab4b",
+  "lastSyncedAt": "2026-06-29T23:21:23Z",
   "docs": {
     "source1.md": {
       "noteId": "gMGdP_bx8xd28J",
@@ -15,8 +15,8 @@
     },
     "docs/note1": {
       "noteId": "8sAg3oIl31HTNP",
-      "repoHash": "09c6c4b6e164a072e0b0a4caa22330d51ad7877ac27fce51ce6300b73d772890",
-      "sliteHash": "9a3ba7aa6b16c6f4ef97eaad06c9597092174b6d726720e3b380150ad3507b7e"
+      "repoHash": "a1ba70d64d9bc18a04d4536113f0356492fe37e0eb6b9f9c9479a8c997768154",
+      "sliteHash": "cd2f44d8a3cb7ef53448d425e321d56fa78bca72fa7e8aeb24c7dfc5263955e8"
     },
     "docs/note2": {
       "noteId": "IE_t5F25QSCyes",
