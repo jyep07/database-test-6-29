@@ -7,7 +7,7 @@
 > **Total pages:** 1
 > **Page anchors:** PDF page numbers from the source.
 > **Figure summaries:** not included
-> **Transcribed by:** datasheet-publisher (datasheet-to-markdown skill) on 2026-06-29
+> **Transcribed by:** datasheet-publisher (datasheet-to-markdown skill) on 2026-06-30
 >
 > Throughout this file, `> **Source page N**` markers (and `<!-- page: N -->` comments)
 > indicate where each section appears in the source document. The source page begins
